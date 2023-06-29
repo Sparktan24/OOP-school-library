@@ -1,4 +1,4 @@
-require "./person.rb"
+require './person'
 
 class Teacher < Person
   def initialize(age, specialization)
@@ -11,5 +11,5 @@ class Teacher < Person
   end
 end
 
-teacher = Teacher.new(29, "PE")
+teacher = Teacher.new(29, 'PE')
 puts teacher.can_use_services?
