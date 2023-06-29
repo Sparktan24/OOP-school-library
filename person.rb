@@ -20,19 +20,7 @@ class Person
   end
 end
 
-class Student < Person
-  def initialize(age, classroom)
-    super(age)
-    @classroom = classroom
-  end
-
-  def play_hooky
-    "¯\(ツ)/¯"
-  end
-end
-
 person = Person.new(17)
-student = Student.new(17, "class")
+
 # person.name = "oliva"
 puts person.can_use_services?
-puts student.play_hooky
