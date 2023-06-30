@@ -1,8 +1,8 @@
 require './person'
 
 class Student < Person
-  def initialize(age, classroom, name = 'Unknown', parent_permisson: true)
-    super(age, name, parent_permisson: parent_permisson)
+  def initialize(age, classroom, name = 'Unknown', parent_permission: true)
+    super(age, name, parent_permission: parent_permission)
     @classroom = classroom
   end
 
@@ -11,5 +11,5 @@ class Student < Person
   end
 end
 
-student = Student.new(17, 'class', 'Sophie', parent_permisson: false)
+student = Student.new(17, 'class', 'Sophie', parent_permission: false)
 puts student.play_hooky
