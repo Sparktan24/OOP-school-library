@@ -1,8 +1,8 @@
 require './person'
 
 class Teacher < Person
-  def initialize(age, specialization, name = 'Unknown', parent_permisson: true)
-    super(age, name, parent_permisson: parent_permisson)
+  def initialize(age, specialization, name = 'Unknown', parent_permission: true)
+    super(age, name, parent_permission: parent_permission)
     @specialization = specialization
   end
 
@@ -11,5 +11,5 @@ class Teacher < Person
   end
 end
 
-teacher = Teacher.new(29, 'PE', 'Samuel', parent_permisson: false)
+teacher = Teacher.new(29, 'PE', 'Samuel', parent_permission: false)
 puts teacher.can_use_services?
