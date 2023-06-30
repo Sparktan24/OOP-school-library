@@ -27,6 +27,28 @@ class Person < Nameable
   end
 end
 
+class Decorator < Nameable
+  def initialize(nameable)
+    @nameable = nameable
+  end
+
+  def correct_name
+    @nameable.correct_name
+  end
+end
+
+class CapitalizeDecorator < Decorator
+  def correct_name
+    @nameable.correct_name.capitalize
+  end
+end
+
+nameable = Nameable.new
+
+decorated_nameable = CapitalizeDecorator.new(nameable)
+
+puts decorated_nameable.correct_name
+
 person = Person.new(17)
 
 person.name = "oliva"
