@@ -2,7 +2,7 @@ class Classroom
   attr_accessor :label, :students
 
   def initialize
-    @label
+    @label = nil
     @students = []
   end
 
