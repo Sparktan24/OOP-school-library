@@ -14,10 +14,10 @@ end
 # require './rental'
 # require './book'
 # require './person'
-# person = Person.new(22, 'maximilianus')
+# person1 = Person.new(22, 'maximilianus')
 # book1 = Book.new("Book 1", "Author 1")
 # rental1 = Rental.new("2023-05-06", person1, book1)
-# person.rentals
+# person1.rentals
 # book1.rentals
 # rental1.person.name
 # rental1.book.title

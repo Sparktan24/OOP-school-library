@@ -12,6 +12,6 @@ class Classroom
   end
 end
 
-classroom = Classroom.new
-classroom.label = 'A-10'
-puts classroom.label
+# classroom = Classroom.new
+# classroom.label = 'A-10'
+# puts classroom.label
