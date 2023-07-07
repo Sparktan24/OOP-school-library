@@ -25,7 +25,7 @@ class App
     books.each { |book| puts "Title: #{book.title}, Author #{book.author}" }
   end
 
-  def create_person(persons)
+  def create_person(people)
     puts 'Do you want to create a student(1) or a teacher(2)'
     option = gets.chomp.to_i
     case option
@@ -50,24 +50,30 @@ class App
       classroom = Classroom.new
       classroom.label = 'A-10'
       student = Student.new(age, classroom, name, parent_permission: parent_permission)
-      persons << student
+      people << student
       puts 'Student created!'
     when 2
     else
       puts 'Invalid option'
     end
   end
+
+  def list_all_people(people)
+    puts 'List of all people: '
+    people.each { |person| puts "ID: #{person.id}, Name: #{person.name} Age: #{person.age}" }
+  end
 end
 
 def main
   app = App.new
   books = []
-  persons = []
+  people = []
 
   loop do
     puts '1. Create a book'
     puts '2. List all books'
     puts '3. Create a person'
+    puts '4. list all people'
     print 'Choose an option: '
     option = gets.chomp.to_i
     case option
@@ -76,7 +82,9 @@ def main
     when 2
       app.list_all_books(books)
     when 3
-      app.create_person(persons)
+      app.create_person(people)
+    when 4
+      app.list_all_people(people)
     when 0
       break
     else
