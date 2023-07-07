@@ -139,39 +139,3 @@ class App
     rentals_for_person.each { |rental| puts "Book: #{rental.book.title}, Date: #{rental.date}" }
   end
 end
-
-def main
-  app = App.new
-  books = []
-  people = []
-  rentals = []
-
-  exit_program = false
-  options = {
-    1 => -> { app.list_all_books(books) },
-    2 => -> { app.list_all_people(people) },
-    3 => -> { app.create_person(people) },
-    4 => -> { app.create_book(books) },
-    5 => -> { app.create_rental(people, books, rentals) },
-    6 => -> { app.list_rents_per_id(people, rentals) },
-    0 => -> { exit_program = true },
-    default: -> { puts 'Invalid option' }
-  }
-
-  loop do
-    puts '1. List all books'
-    puts '2. List all peple'
-    puts '3. Create a person'
-    puts '4. Create a book'
-    puts '5. Create a rental'
-    puts '6. list rents person(ID)'
-    puts '0. To exit'
-    print 'Choose an option: '
-    option = gets.chomp.to_i
-
-    options[option]&.call || options[:default]&.call
-    break if exit_program
-  end
-end
-
-main
