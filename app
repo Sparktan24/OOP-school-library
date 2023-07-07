@@ -21,8 +21,12 @@ class App
   end
 
   def list_all_books(books)
-    puts 'List of all books: '
-    books.each_with_index { |book, index| puts "#{index}) Title: #{book.title}, Author #{book.author}" }
+    if books.empty?
+      puts 'There is no books yet!'
+    else
+      puts 'List of all books: '
+      books.each_with_index { |book, index| puts "#{index}) Title: #{book.title}, Author #{book.author}" }
+    end
   end
 
   def create_person(people)
@@ -83,8 +87,12 @@ class App
   end
 
   def list_all_people(people)
-    puts 'List of all people: '
-    people.each_with_index { |person, index| puts "#{index}) ID: #{person.id}, Name: #{person.name} Age: #{person.age}" }
+    if people.empty?
+      puts 'There is no people yet!'
+    else
+      puts 'List of all people: '
+      people.each_with_index { |person, index| puts "#{index}) ID: #{person.id}, Name: #{person.name} Age: #{person.age}" }
+    end
   end
 
   def create_rental(people, books, rentals)
@@ -168,4 +176,3 @@ def main
 end
 
 main
-# require './app.rb'
