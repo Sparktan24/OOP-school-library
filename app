@@ -91,7 +91,9 @@ class App
       puts 'There is no people yet!'
     else
       puts 'List of all people: '
-      people.each_with_index { |person, index| puts "#{index}) ID: #{person.id}, Name: #{person.name} Age: #{person.age}" }
+      people.each_with_index do |person, index|
+        puts "#{index}) ID: #{person.id}, Name: #{person.name} Age: #{person.age}"
+      end
     end
   end
 
@@ -105,6 +107,7 @@ class App
       puts 'Book not found'
       return
     end
+
     print 'Select a number from the following '
     list_all_people(people)
     person_index = gets.chomp.to_i
@@ -113,6 +116,7 @@ class App
       puts 'Person not found'
       return
     end
+
     print 'Select a date: '
     date = gets.chomp
 
@@ -120,11 +124,6 @@ class App
     rentals << rental
     puts 'Rental created! '
   end
-
-  # def list_rents(rentals)
-  # puts 'List of all rentals: '
-  # rentals.each_with_index { |rental, index| puts "#{index}) ID: #{rental.person}, Name: #{rental.book} Age: #{rental.date}" }
-  # end
 
   def list_rents_per_id(people, rentals)
     puts 'Enter person ID '
