@@ -52,7 +52,19 @@ class App
       student = Student.new(age, classroom, name, parent_permission: parent_permission)
       people << student
       puts 'Student created!'
+
     when 2
+      puts 'Enter teacher details: '
+      print 'Name: '
+      name = gets.chomp
+      print 'Age: '
+      age = gets.chomp.to_i
+      print 'Specilization: '
+      specialization = gets.chomp
+      teacher = Teacher.new(age, specialization, name)
+      people << teacher
+      puts 'Teacher created!'
+
     else
       puts 'Invalid option'
     end
