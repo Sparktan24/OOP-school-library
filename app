@@ -139,6 +139,18 @@ def main
   people = []
   rentals = []
 
+  exit_program = false
+  options = {
+    1 => -> { app.list_all_books(books) },
+    2 => -> { app.list_all_people(people) },
+    3 => -> { app.create_person(people) },
+    4 => -> { app.create_book(books) },
+    5 => -> { app.create_rental(people, books, rentals) },
+    6 => -> { app.list_rents_per_id(people, rentals) },
+    0 => -> { exit_program = true },
+    default: -> { puts 'Invalid option' }
+  }
+
   loop do
     puts '1. List all books'
     puts '2. List all peple'
@@ -149,24 +161,9 @@ def main
     puts '0. To exit'
     print 'Choose an option: '
     option = gets.chomp.to_i
-    case option
-    when 1
-      app.list_all_books(books)
-    when 2
-      app.list_all_people(people)
-    when 3
-      app.create_person(people)
-    when 4
-      app.create_book(books)
-    when 5
-      app.create_rental(people, books, rentals)
-    when 6
-      app.list_rents_per_id(people, rentals)
-    when 0
-      break
-    else
-      puts 'invalid option'
-    end
+
+    options[option]&.call || options[:default]&.call
+    break if exit_program
   end
 end
 
