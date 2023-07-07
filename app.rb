@@ -13,9 +13,8 @@ class App
     print 'Title: '
     title = gets.chomp
     print 'Author: '
-    author = gets.chomp
-
-    book = Book.new(title, authorr)
+    authorr = gets.chomp
+    book = Book.new(title, author)
     books << book
     puts 'Book created successfully!'
   end
