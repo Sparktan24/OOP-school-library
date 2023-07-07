@@ -22,7 +22,7 @@ class App
 
   def list_all_books(books)
     puts 'List of all books: '
-    books.each { |book| puts "Title: #{book.title}, Author #{book.author}" }
+    books.each_with_index { |book, index| puts "#{index}) Title: #{book.title}, Author #{book.author}" }
   end
 
   def create_person(people)
@@ -84,7 +84,30 @@ class App
 
   def list_all_people(people)
     puts 'List of all people: '
-    people.each { |person| puts "ID: #{person.id}, Name: #{person.name} Age: #{person.age}" }
+    people.each_with_index { |person, index| puts "#{index}) ID: #{person.id}, Name: #{person.name} Age: #{person.age}" }
+  end
+
+  def create_rental(people, books, rentals)
+    puts 'Enter rental details: '
+    print 'Select a number from the following '
+    list_all_books(books)
+    book_index = gets.chomp.to_i
+    book = books[book_index]
+    print 'Select a number from the following '
+    list_all_people(people)
+    person_index = gets.chomp.to_i
+    person = people[person_index]
+    print 'Select a date: '
+    date = gets.chomp
+
+    rental = Rental.new(date, person, book)
+    rentals << rental
+    puts 'Rental created! '
+  end
+
+  def list_rents(rentals)
+    puts 'List of all rentals: '
+    rentals.each_with_index { |rental, index| puts "#{index}) ID: #{rental.person}, Name: #{rental.book} Age: #{rental.date}" }
   end
 end
 
@@ -92,12 +115,14 @@ def main
   app = App.new
   books = []
   people = []
+  rentals = []
 
   loop do
     puts '1. Create a book'
     puts '2. List all books'
     puts '3. Create a person'
     puts '4. list all people'
+    puts '5. Create a rental'
     print 'Choose an option: '
     option = gets.chomp.to_i
     case option
@@ -109,6 +134,10 @@ def main
       app.create_person(people)
     when 4
       app.list_all_people(people)
+    when 5
+      app.create_rental(people, books, rentals)
+    when 6
+      app.list_rents(rentals)
     when 0
       break
     else
