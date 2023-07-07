@@ -93,10 +93,18 @@ class App
     list_all_books(books)
     book_index = gets.chomp.to_i
     book = books[book_index]
+    if book.nil?
+      puts 'Book not found'
+      return
+    end
     print 'Select a number from the following '
     list_all_people(people)
     person_index = gets.chomp.to_i
     person = people[person_index]
+    if person.nil?
+      puts 'Person not found'
+      return
+    end
     print 'Select a date: '
     date = gets.chomp
 
@@ -105,9 +113,23 @@ class App
     puts 'Rental created! '
   end
 
-  def list_rents(rentals)
-    puts 'List of all rentals: '
-    rentals.each_with_index { |rental, index| puts "#{index}) ID: #{rental.person}, Name: #{rental.book} Age: #{rental.date}" }
+  # def list_rents(rentals)
+  # puts 'List of all rentals: '
+  # rentals.each_with_index { |rental, index| puts "#{index}) ID: #{rental.person}, Name: #{rental.book} Age: #{rental.date}" }
+  # end
+
+  def list_rents_per_id(people, rentals)
+    puts 'Enter person ID '
+    person_id = gets.chomp.to_i
+    person = people.find { |p| p.id == person_id }
+    if person.nil?
+      puts 'Person not found'
+      return
+    end
+
+    puts "Rentals for #{person.name}: "
+    rentals_for_person = rentals.select { |rental| rental.person == person }
+    rentals_for_person.each { |rental| puts "Book: #{rental.book.title}, Date: #{rental.date}" }
   end
 end
 
@@ -118,26 +140,28 @@ def main
   rentals = []
 
   loop do
-    puts '1. Create a book'
-    puts '2. List all books'
+    puts '1. List all books'
+    puts '2. List all peple'
     puts '3. Create a person'
-    puts '4. list all people'
+    puts '4. Create a book'
     puts '5. Create a rental'
+    puts '6. list rents person(ID)'
+    puts '0. To exit'
     print 'Choose an option: '
     option = gets.chomp.to_i
     case option
     when 1
-      app.create_book(books)
-    when 2
       app.list_all_books(books)
+    when 2
+      app.list_all_people(people)
     when 3
       app.create_person(people)
     when 4
-      app.list_all_people(people)
+      app.create_book(books)
     when 5
       app.create_rental(people, books, rentals)
     when 6
-      app.list_rents(rentals)
+      app.list_rents_per_id(people, rentals)
     when 0
       break
     else
