@@ -32,20 +32,24 @@ class App
     when 1
       create_student(people)
     when 2
-      puts 'Enter teacher details: '
-      print 'Name: '
-      name = gets.chomp
-      print 'Age: '
-      age = gets.chomp.to_i
-      print 'Specilization: '
-      specialization = gets.chomp
-      teacher = Teacher.new(age, specialization, name)
-      people << teacher
-      puts 'Teacher created!'
-
+      create_teacher(people)
     else
       puts 'Invalid option'
     end
+  end
+
+  def create_teacher(people)
+    puts 'Enter teacher details: '
+    print 'Name: '
+    name = gets.chomp
+    print 'Age: '
+    age = gets.chomp.to_i
+    print 'Specilization: '
+    specialization = gets.chomp
+
+    teacher = Teacher.new(age, specialization, name)
+    people << teacher
+    puts 'Teacher created!'
   end
 
   def create_student(people)
