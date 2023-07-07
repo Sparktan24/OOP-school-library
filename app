@@ -30,29 +30,7 @@ class App
     option = gets.chomp.to_i
     case option
     when 1
-      puts 'Enter student details: '
-      print 'Name: '
-      name = gets.chomp
-      print 'Age '
-      age = gets.chomp.to_i
-      print 'Has parents permission?[Y/N]'
-      parent_permission = gets.chomp.downcase
-      case parent_permission
-      when 'y'
-        parent_permission = true
-      when 'n'
-        parent_permission = false
-      else 
-        puts 'Invalid option'
-        return
-      end
-      print 'Choose classroom: '
-      classroom = Classroom.new
-      classroom.label = 'A-10'
-      student = Student.new(age, classroom, name, parent_permission: parent_permission)
-      people << student
-      puts 'Student created!'
-
+      create_student(people)
     when 2
       puts 'Enter teacher details: '
       print 'Name: '
@@ -67,6 +45,36 @@ class App
 
     else
       puts 'Invalid option'
+    end
+  end
+
+  def create_student(people)
+    puts 'Enter student details: '
+    print 'Name: '
+    name = gets.chomp
+    print 'Age: '
+    age = gets.chomp.to_i
+    parent_permission = obtain_parent_permission
+
+    classroom = Classroom.new
+    classroom.label = 'A-10'
+    student = Student.new(age, classroom, name, parent_permission: parent_permission)
+    people << student
+    puts 'Student created!'
+  end
+
+  def obtain_parent_permission
+    print 'Has parents permission?[Y/N]: '
+    parent_permission = gets.chomp.downcase
+
+    case parent_permission
+    when 'y'
+      true
+    when 'n'
+      false
+    else
+      puts 'Invalid option'
+      obtain_parent_permission
     end
   end
 
