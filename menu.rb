@@ -1,6 +1,8 @@
 require_relative 'app'
+# require 'pry'
 
-class Menu
+class Menu  
+
   def initialize
     @app = App.new
     @options = menu_options
@@ -10,7 +12,11 @@ class Menu
     loop do
       display_menu
       option = option_choice
-
+      if option.zero?
+        # binding.pry
+        @app.save_books(@app.books)
+      end
+    
       break if option.zero?
 
       print 'Choose an option: '
