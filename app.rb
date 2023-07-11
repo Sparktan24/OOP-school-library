@@ -6,7 +6,7 @@ require_relative 'book'
 require_relative 'data'
 
 class App
-  attr_reader :books
+  attr_reader :books, :people
 
   include DataJson
 
@@ -15,6 +15,7 @@ class App
     @people = []
     @rentals = []
     load_books(@books)
+    load_people(@people)
   end
 
   def create_book
