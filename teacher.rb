@@ -10,5 +10,3 @@ class Teacher < Person
     true
   end
 end
-# teacher = Teacher.new(29, 'PE', 'Samuel', parent_permission: false)
-# puts teacher.can_use_services?

@@ -31,7 +31,7 @@ class Menu
 
   def display_menu
     puts 'Menu:'
-    @options.each_with_index { |option, index| puts "#{index + 1}. #{option[:description]}" }
+    @options.each_with_index { |item_option, index| puts "#{index + 1}. #{item_option[:description]}" }
     puts '0. To exit'
   end
 
