@@ -2,14 +2,14 @@ require 'json'
 require_relative 'book'
 # require 'pry'
 
-module Data_json
-
+module DataJson
   def load_books(books)
     return unless File.exist?('./json/books.json')
+
     books_data = JSON.parse(File.read('./json/books.json'))
     books_data.each do |book|
       books << Book.new(book['title'], book['author'])
-    end       
+    end
   end
 
   def save_books(books)

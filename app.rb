@@ -5,15 +5,16 @@ require_relative 'rental'
 require_relative 'book'
 require_relative 'data'
 
- class App
+class App
   attr_reader :books
-  include Data_json
+
+  include DataJson
 
   def initialize
     @books = []
     @people = []
-    @rentals = []    
-    load_books(@books)    
+    @rentals = []
+    load_books(@books)
   end
 
   def create_book
