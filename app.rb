@@ -8,7 +8,13 @@ require_relative 'rental'
 require_relative 'book'
 
 class App
-  def create_book(books)
+  def initialize
+    @books = []
+    @people = []
+    @rentals = []
+  end
+
+  def create_book
     puts 'Enter book details:'
     print 'Title: '
     title = gets.chomp
@@ -16,33 +22,33 @@ class App
     author = gets.chomp
 
     book = Book.new(title, author)
-    books << book
+    @books << book
     puts 'Book created successfully!'
   end
 
-  def list_all_books(books)
-    if books.empty?
+  def list_all_books
+    if @books.empty?
       puts 'There is no books yet!'
     else
       puts 'List of all books: '
-      books.each_with_index { |book, index| puts "#{index}) Title: #{book.title}, Author #{book.author}" }
+      @books.each_with_index { |book, index| puts "#{index}) Title: #{book.title}, Author #{book.author}" }
     end
   end
 
-  def create_person(people)
+  def create_person
     puts 'Do you want to create a student(1) or a teacher(2)'
     option = gets.chomp.to_i
     case option
     when 1
-      create_student(people)
+      create_student
     when 2
-      create_teacher(people)
+      create_teacher
     else
       puts 'Invalid option'
     end
   end
 
-  def create_teacher(people)
+  def create_teacher
     puts 'Enter teacher details: '
     print 'Name: '
     name = gets.chomp
@@ -52,11 +58,11 @@ class App
     specialization = gets.chomp
 
     teacher = Teacher.new(age, specialization, name)
-    people << teacher
+    @people << teacher
     puts 'Teacher created!'
   end
 
-  def create_student(people)
+  def create_student
     puts 'Enter student details: '
     print 'Name: '
     name = gets.chomp
@@ -67,7 +73,7 @@ class App
     classroom = Classroom.new
     classroom.label = 'A-10'
     student = Student.new(age, classroom, name, parent_permission: parent_permission)
-    people << student
+    @people << student
     puts 'Student created!'
   end
 
@@ -86,32 +92,32 @@ class App
     end
   end
 
-  def list_all_people(people)
-    if people.empty?
+  def list_all_people
+    if @people.empty?
       puts 'There is no people yet!'
     else
       puts 'List of all people: '
-      people.each_with_index do |person, index|
+      @people.each_with_index do |person, index|
         puts "#{index}) ID: #{person.id}, Name: #{person.name} Age: #{person.age}"
       end
     end
   end
 
-  def create_rental(people, books, rentals)
+  def create_rental
     puts 'Enter rental details: '
     print 'Select a number from the following '
-    list_all_books(books)
+    list_all_books
     book_index = gets.chomp.to_i
-    book = books[book_index]
+    book = @books[book_index]
     if book.nil?
       puts 'Book not found'
       return
     end
 
     print 'Select a number from the following '
-    list_all_people(people)
+    list_all_people
     person_index = gets.chomp.to_i
-    person = people[person_index]
+    person = @people[person_index]
     if person.nil?
       puts 'Person not found'
       return
@@ -121,21 +127,21 @@ class App
     date = gets.chomp
 
     rental = Rental.new(date, person, book)
-    rentals << rental
+    @rentals << rental
     puts 'Rental created! '
   end
 
-  def list_rents_per_id(people, rentals)
+  def list_rents_per_id
     puts 'Enter person ID '
     person_id = gets.chomp.to_i
-    person = people.find { |p| p.id == person_id }
+    person = @people.find { |p| p.id == person_id }
     if person.nil?
       puts 'Person not found'
       return
     end
 
     puts "Rentals for #{person.name}: "
-    rentals_for_person = rentals.select { |rental| rental.person == person }
+    rentals_for_person = @rentals.select { |rental| rental.person == person }
     rentals_for_person.each { |rental| puts "Book: #{rental.book.title}, Date: #{rental.date}" }
   end
 end
