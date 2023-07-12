@@ -10,9 +10,7 @@ class Menu
     loop do
       display_menu
       option = option_choice
-      if option.zero?
-        @app.save_data(@app.books, @app.people, @app.rentals)
-      end
+      option.zero? && @app.save_data(@app.books, @app.people, @app.rentals)
 
       break if option.zero?
 

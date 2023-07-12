@@ -12,15 +12,14 @@ module DataJson
     end
   end
 
-  def save_data(books, people)
+  def save_data(books, people, rentals)
     save_books(books)
     save_people(people)
+    save_rentals(rentals)
   end
 
   def save_books(books)
-
-    File.write('./json/books.json', JSON.pretty_generate(@books.map(&:to_json)))
-    
+    File.write('./json/books.json', JSON.pretty_generate(books.map(&:to_json)))
   end
 
   def save_people(people)
@@ -55,7 +54,12 @@ module DataJson
         student_name = student['name']
         student_age = student['age']
         student_parent_permission = student['parent_permission']
-        student_instance = Student.new(student_age, classroom, student_name, parent_permission: student_parent_permission)
+        student_instance = Student.new(
+          student_age,
+          classroom,
+          student_name,
+          parent_permission: student_parent_permission
+        )
         classroom.add_student(student_instance)
       end
     end
@@ -72,7 +76,7 @@ module DataJson
     people << teacher
   end
 
-  def load_rentals(people, books,rentals)
+  def load_rentals(people, books, rentals)
     return unless File.exist?('./json/rentals.json')
 
     rentals_data = JSON.parse(File.read('./json/rentals.json'))
