@@ -13,8 +13,9 @@ class Menu
       option = option_choice
       if option.zero?
         # binding.pry
-        @app.save_books(@app.books)
-        @app.save_people(@app.people)
+        # @app.save_books(@app.books)
+        # @app.save_people(@app.people)
+        @app.save_data(@app.books, @app.people)
       end
 
       break if option.zero?

@@ -12,6 +12,11 @@ module DataJson
     end
   end
 
+  def save_data(books, people)
+    save_books(books)
+    save_people(people)
+  end
+
   def save_books(books)
     # binding.pry
     json = books.to_json
@@ -45,7 +50,7 @@ module DataJson
     parent_permission = student_data['parent_permission']
     classroom_data = student_data['classroom']
 
-    classroom = nil
+    # classroom = nil
     if classroom_data
       classroom_label = classroom_data['label']
       classroom = Classroom.new(classroom_label)
