@@ -14,10 +14,8 @@ module Data_json
 
   def save_books(books)
     # binding.pry
-    json = books.to_json
-    File.write('./json/books.json', json)
-    # File.open('./json/books.json', 'w') do |file|
-    #   file.write(JSON.pretty_generate(books))
-    # end
+    # json = books.to_json
+    File.write('./json/books.json', JSON.pretty_generate(@books.map(&:to_json)))
+    
   end
 end
