@@ -10,7 +10,7 @@ class Rental
     book.add_rental(self)
   end
 
-  def to_json(*args)
+  def to_json
     {
       book: book.title,
       person: person.name,
