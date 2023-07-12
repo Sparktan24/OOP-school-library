@@ -1,5 +1,4 @@
 require_relative 'app'
-# require 'pry'
 
 class Menu
   def initialize
@@ -12,9 +11,9 @@ class Menu
       display_menu
       option = option_choice
       if option.zero?
-        # binding.pry
         @app.save_books(@app.books)
         @app.save_people(@app.people)
+        @app.save_rentals(@app.rentals)
       end
 
       break if option.zero?

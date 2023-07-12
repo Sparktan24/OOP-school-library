@@ -9,16 +9,12 @@ class Rental
     person.add_rental(self)
     book.add_rental(self)
   end
+
+  def to_json(*args)
+    {
+      book: book.title,
+      person: person.name,
+      date: date
+    }
+  end
 end
-# IRB
-# require './rental'
-# require './book'
-# require './person'
-# person1 = Person.new(22, 'maximilianus')
-# book1 = Book.new("Book 1", "Author 1")
-# rental1 = Rental.new("2023-05-06", person1, book1)
-# person1.rentals
-# book1.rentals
-# rental1.person.name
-# rental1.book.title
-# rental1.date
