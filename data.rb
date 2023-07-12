@@ -1,6 +1,6 @@
 require 'json'
 require_relative 'book'
-# require 'pry'
+require_relative 'rental'
 
 module DataJson
   def load_books(books)
@@ -18,12 +18,9 @@ module DataJson
   end
 
   def save_books(books)
-    # binding.pry
-    json = books.to_json
-    File.write('./json/books.json', json)
-    # File.open('./json/books.json', 'w') do |file|
-    #   file.write(JSON.pretty_generate(books))
-    # end
+
+    File.write('./json/books.json', JSON.pretty_generate(@books.map(&:to_json)))
+    
   end
 
   def save_people(people)
@@ -73,5 +70,25 @@ module DataJson
     specialization = teacher_data['specialization']
     teacher = Teacher.new(age, specialization, name)
     people << teacher
+  end
+
+  def load_rentals(people, books,rentals)
+    return unless File.exist?('./json/rentals.json')
+
+    rentals_data = JSON.parse(File.read('./json/rentals.json'))
+    rentals_data.each do |rental_data|
+      book_title = rental_data['book']
+      person_name = rental_data['person']
+      date = rental_data['date']
+
+      book = books.find { |book| book.title == book_title }
+      person = people.find { |person| person.name == person_name }
+      rentals << Rental.new(date, person, book)
+    end
+  end
+
+  def save_rentals(rentals)
+    json_data = rentals.map(&:to_json)
+    File.write('./json/rentals.json', JSON.pretty_generate(json_data))
   end
 end
