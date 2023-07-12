@@ -85,9 +85,9 @@ module DataJson
       person_name = rental_data['person']
       date = rental_data['date']
 
-      books = books.find { |book| book.title == book_title }
-      people = people.find { |person| person.name == person_name }
-      rentals << Rental.new(date, person, book)
+      found_book = books.find { |book| book.title == book_title }
+      found_person = people.find { |person| person.name == person_name }
+      rentals << Rental.new(date, found_person, found_book)
     end
   end
 
