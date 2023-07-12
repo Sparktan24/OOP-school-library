@@ -1,17 +1,22 @@
-#!/usr/bin/env ruby
-
-require_relative 'person'
 require_relative 'classroom'
 require_relative 'student'
 require_relative 'teacher'
 require_relative 'rental'
 require_relative 'book'
+require_relative 'data'
 
 class App
+  attr_reader :books, :people, :rentals
+
+  include DataJson
+
   def initialize
     @books = []
     @people = []
     @rentals = []
+    load_books(@books)
+    load_people(@people)
+    load_rentals(@people, @books, @rentals)
   end
 
   def create_book
