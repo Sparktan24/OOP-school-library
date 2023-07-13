@@ -27,4 +27,22 @@ describe Person do
       )
     end
   end
+
+  describe '#correct_name' do
+    it 'returns the correct name' do
+      expect(person.correct_name).to eq('maximilianus')
+    end
+  end
+
+  describe '#can_use_services?' do
+    it 'returns true if the person is of age' do
+      expect(person.can_use_services?).to eq(true)
+    end
+  end
+
+  describe '#of_age?' do
+    it 'returns true if the person is of age' do
+      expect(person.send(:of_age?)).to eq(true)
+    end
+  end
 end
