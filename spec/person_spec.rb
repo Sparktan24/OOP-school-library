@@ -4,7 +4,7 @@ require_relative '../book'
 
 describe Person do
   book = Book.new('The Lord of the Rings', 'J. R. R. Tolkien')
-  person = Person.new(22, 'maximilianus')
+  person = Person.new(22, 'Larry Villegas')
   rental = Rental.new('2021-09-01', person, book)
 
   describe '#add_rental' do
@@ -21,10 +21,28 @@ describe Person do
           type: 'Person',
           id: person.id,
           age: 22,
-          name: 'maximilianus',
+          name: 'Larry Villegas',
           parent_permission: true
         }
       )
+    end
+  end
+
+  describe '#correct_name' do
+    it 'returns the correct name' do
+      expect(person.correct_name).to eq('Larry Villegas')
+    end
+  end
+
+  describe '#can_use_services?' do
+    it 'returns true if the person is of age' do
+      expect(person.can_use_services?).to eq(true)
+    end
+  end
+
+  describe '#of_age?' do
+    it 'returns true if the person is of age' do
+      expect(person.send(:of_age?)).to eq(true)
     end
   end
 end
